@@ -51,7 +51,7 @@
 
 <style lang="scss">
 .header {
-  padding: 48px 0;
+  padding: 24px 0;
   .container {
     display: flex;
     align-items: center;
@@ -60,7 +60,7 @@
   &-menu {
     &-list {
       display: flex;
-      gap: 44px;
+      gap: 22px;
       align-items: center;
       list-style: none;
       margin-bottom: 0;
@@ -70,12 +70,20 @@
       a {
         color: $secondary-color;
         font-weight: 700;
+
+        &:hover {
+          text-decoration: none;
+          color: $primary-color;
+        }
       }
     }
     &-cart {
       a {
         display: flex;
         align-items: flex-end;
+      }
+      path {
+        @include transition;
       }
       &-badge {
         width: 15px;
@@ -87,6 +95,21 @@
         font-weight: 700;
         font-size: 8px;
         color: #fff;
+      }
+      &:hover {
+        path {
+          fill: darken($primary-color, 10%);
+        }
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    padding: 48px 0;
+
+    &-menu {
+      &-list {
+        gap: 44px;
       }
     }
   }

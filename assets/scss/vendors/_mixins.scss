@@ -1,0 +1,3 @@
+@mixin transition($speed: .1s) {
+  transition: all $speed cubic-bezier(.215,.61,.355,1);
+}
