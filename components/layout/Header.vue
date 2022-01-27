@@ -22,30 +22,25 @@
         </NuxtLink>
       </div>
       <nav class="header-menu">
-        <ul>
-          <li>
+        <ul class="header-menu-list">
+          <li class="header-menu-item">
             <NuxtLink to="/"> Produtos </NuxtLink>
           </li>
-          <li>
+          <li class="header-menu-item header-menu-cart">
             <NuxtLink to="/carrinho">
               <svg
+                version="1.2"
                 xmlns="http://www.w3.org/2000/svg"
-                height="21.333"
-                width="21.333"
-                xml:space="preserve"
+                viewBox="0 0 36 36"
+                width="35"
+                height="35"
               >
                 <path
-                  style="
-                    fill: #000;
-                    fill-opacity: 1;
-                    fill-rule: nonzero;
-                    stroke: none;
-                  "
-                  d="M48.012 31.988c-8.793 0-16.024-7.187-16.024-15.969C31.988 7.192 39.218 0 48.012 0 56.8 0 63.98 7.191 63.98 16.02c0 8.78-7.18 15.968-15.968 15.968zM0 160v-16.02h16.02L44.8 83.2 33.59 63.98c-.781-2.378-1.602-5.582-1.602-7.96 0-8.829 7.23-16.02 16.024-16.02h95.968v16.02H51.21c-.82 0-1.6.78-1.6 1.601v.777l7.19 13.59h59.22c6.359 0 11.171 3.211 13.589 8.012l28.789 51.988C160 133.59 160 134.41 160 136.02c0 4.761-3.199 7.96-8.012 7.96H33.59L26.41 160ZM128.012 31.988c-8.793 0-16.024-7.187-16.024-15.968 0-8.829 7.231-16.02 16.024-16.02 8.789 0 15.968 7.191 15.968 16.02 0 8.78-7.179 15.968-15.968 15.968z"
-                  transform="matrix(.13333 0 0 -.13333 0 21.333)"
+                  d="M11.4 28.1c1.9 0 3.4 1.5 3.4 3.4S13.3 35 11.4 35s-3.5-1.6-3.5-3.5 1.6-3.4 3.5-3.4zM1 .5v3.4h3.5L10.7 17l-2.4 4.2c-.2.5-.4 1.2-.4 1.7 0 1.9 1.6 3.5 3.5 3.5h20.7v-3.5h-20c-.2 0-.4-.2-.4-.3v-.2l1.6-2.9h12.8c1.4 0 2.4-.7 2.9-1.8l6.2-11.2c.4-.3.4-.5.4-.9 0-1-.7-1.7-1.7-1.7H8.3L6.7.5zm27.7 27.6c-1.9 0-3.5 1.5-3.5 3.4s1.6 3.5 3.5 3.5 3.4-1.6 3.4-3.5-1.5-3.4-3.4-3.4zm0 0"
+                  fill="#8d35b7"
                 />
               </svg>
-              <div class="header-menu-badge">0</div>
+              <div class="header-menu-cart-badge">0</div>
             </NuxtLink>
           </li>
         </ul>
@@ -56,11 +51,44 @@
 
 <style lang="scss">
 .header {
-  padding: 52px 0;
+  padding: 48px 0;
   .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+  &-menu {
+    &-list {
+      display: flex;
+      gap: 44px;
+      align-items: center;
+      list-style: none;
+      margin-bottom: 0;
+      padding-left: 0;
+    }
+    &-item {
+      a {
+        color: $secondary-color;
+        font-weight: 700;
+      }
+    }
+    &-cart {
+      a {
+        display: flex;
+        align-items: flex-end;
+      }
+      &-badge {
+        width: 15px;
+        height: 15px;
+        border-radius: 7px;
+        background-color: #ed1c24;
+        text-align: center;
+        line-height: 15px;
+        font-weight: 700;
+        font-size: 8px;
+        color: #fff;
+      }
+    }
   }
 }
 </style>
