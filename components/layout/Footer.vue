@@ -20,3 +20,12 @@
     </div>
   </footer>
 </template>
+
+<style lang="scss">
+.footer {
+  display: flex;
+  justify-content: center;
+  padding: 35px 15px 30px;
+  background-color: #bbb;
+}
+</style>

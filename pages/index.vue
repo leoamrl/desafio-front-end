@@ -1,5 +1,7 @@
 <template>
-  <p>HomePage</p>
+  <div class="container">
+    <SearchForm />
+  </div>
 </template>
 
 <script lang="ts">
