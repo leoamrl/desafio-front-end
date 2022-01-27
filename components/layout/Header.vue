@@ -51,3 +51,14 @@
     </div>
   </header>
 </template>
+
+<style lang="scss">
+.header {
+  padding: 52px 0;
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+</style>
