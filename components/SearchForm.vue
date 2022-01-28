@@ -8,6 +8,8 @@
           type="text"
           name="s"
           id="s"
+          v-model="search"
+          v-on:keyup="handleSearch"
           placeholder="Encontre seu produto"
         />
         <button class="searchform-button">
@@ -27,6 +29,23 @@
     </form>
   </section>
 </template>
+
+<script lang="ts">
+import Vue from "vue";
+export default Vue.extend({
+  data() {
+    return {
+      search: "",
+    };
+  },
+  methods: {
+    handleSearch() {
+      console.log(this.search);
+      this.$emit("postSearch", this.search);
+    },
+  },
+});
+</script>
 
 <style lang="scss">
 .searchform {
