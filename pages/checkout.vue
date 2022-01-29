@@ -3,41 +3,60 @@
     <form class="checkout-form row">
       <div class="col-12 col-sm-6">
         <label for="name">Nome *</label>
-        <input type="text" name="name" id="name" />
+        <input required type="text" name="name" id="name" />
       </div>
       <div class="col-12 col-sm-6">
         <label for="cep">CEP *</label>
-        <input type="text" name="cep" id="cep" />
+        <input
+          required
+          type="text"
+          name="cep"
+          v-model="cep"
+          v-on:blur="handleBlur"
+          id="cep"
+        />
       </div>
       <div class="col-12 col-sm-6">
         <label for="email">E-mail *</label>
-        <input type="email" name="email" id="email" />
+        <input required type="email" name="email" id="email" />
       </div>
       <div class="col-12 col-sm-6">
         <div class="row">
           <div class="col-12 col-sm-8">
             <label for="address">Endereço *</label>
-            <input type="text" name="address" id="address" />
+            <input
+              required
+              type="text"
+              name="address"
+              v-model="address"
+              id="address"
+            />
           </div>
           <div class="col-12 col-sm-4">
             <label for="number">Número *</label>
-            <input type="text" name="number" id="number" />
+            <input required type="text" name="number" id="number" />
           </div>
         </div>
       </div>
       <div class="col-12 col-sm-6">
         <label for="cpf">CPF *</label>
-        <input type="text" name="cpf" id="cpf" />
+        <input required type="text" name="cpf" id="cpf" />
       </div>
       <div class="col-12 col-sm-6">
         <div class="row">
           <div class="col-12 col-sm-6">
             <label for="complement">Complemento *</label>
-            <input type="text" name="complement" id="complement" />
+            <input required type="text" name="complement" id="complement" />
           </div>
           <div class="col-12 col-sm-6">
             <label for="district">Bairro *</label>
-            <input type="text" name="district" id="district" />
+            <input
+              required
+              type="text"
+              name="district"
+              v-model="district"
+              id="district"
+            />
           </div>
         </div>
       </div>
@@ -45,11 +64,11 @@
         <div class="row">
           <div class="col-12 col-sm-6">
             <label for="birthdate">Data de Nascimento *</label>
-            <input type="date" name="birthdate" id="birthdate" />
+            <input required type="date" name="birthdate" id="birthdate" />
           </div>
           <div class="col-12 col-sm-6">
             <label for="phone">Telefone *</label>
-            <input type="text" name="phone" id="phone" />
+            <input required type="text" name="phone" id="phone" />
           </div>
         </div>
       </div>
@@ -57,11 +76,17 @@
         <div class="row">
           <div class="col-12 col-sm-8">
             <label for="city">Cidade *</label>
-            <input type="text" name="city" id="city" />
+            <input required type="text" v-model="city" name="city" id="city" />
           </div>
           <div class="col-12 col-sm-4">
             <label for="state">Estado *</label>
-            <input type="text" name="state" id="state" />
+            <input
+              required
+              type="text"
+              v-model="state"
+              name="state"
+              id="state"
+            />
           </div>
         </div>
       </div>
@@ -85,6 +110,25 @@ export default Vue.extend({
     return {
       title: "Checkout - MktPlace",
     };
+  },
+  data() {
+    return {
+      cep: "",
+      address: "",
+      district: "",
+      city: "",
+      state: "",
+    };
+  },
+  methods: {
+    async handleBlur(e: Event) {
+      const api = "https://viacep.com.br/ws/" + this.cep + "/json/";
+      const cepData = await this.$axios.$get(api);
+      this.address = cepData.logradouro;
+      this.district = cepData.bairro;
+      this.city = cepData.localidade;
+      this.state = cepData.uf;
+    },
   },
 });
 </script>
