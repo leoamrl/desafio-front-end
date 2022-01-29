@@ -40,7 +40,6 @@ export default Vue.extend({
   },
   methods: {
     handleSearch() {
-      console.log(this.search);
       this.$emit("postSearch", this.search);
     },
   },

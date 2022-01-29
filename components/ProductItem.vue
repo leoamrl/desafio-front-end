@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-declare interface Product {
+declare interface Cart {
   id: number;
   name: string;
   category: string;
@@ -30,16 +30,14 @@ export default {
   props: {
     product: Object,
   },
-  data: function () {
+  data() {
     return {
-      cart: [],
+      cart: [] as Cart[],
     };
   },
   methods: {
-    addCart(product: object) {
+    addCart(product: Object) {
       console.log(product);
-      this.cart.push(product);
-      console.log(this.cart);
     },
   },
 };
