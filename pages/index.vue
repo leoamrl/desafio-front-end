@@ -1,18 +1,21 @@
 <template>
-  <div class="container">
-    <SearchForm v-on:postSearch="handleSearch" />
-    <ul class="products row gy-6">
-      <li
-        class="col-12 col-sm-6 col-lg-4"
-        v-for="product in filteredProducts"
-        :key="product.id"
-      >
-        <ProductItem :product="product" />
-      </li>
-      <li v-if="error" class="col-12 products-error">
-        Nenhum produto encontrado
-      </li>
-    </ul>
+  <div>
+    <Slider />
+    <div class="container">
+      <SearchForm v-on:postSearch="handleSearch" />
+      <ul class="products row gy-6">
+        <li
+          class="col-12 col-sm-6 col-lg-4"
+          v-for="product in filteredProducts"
+          :key="product.id"
+        >
+          <ProductItem :product="product" />
+        </li>
+        <li v-if="error" class="col-12 products-error">
+          Nenhum produto encontrado
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -51,7 +54,6 @@ export default Vue.extend({
   methods: {
     handleSearch(value: string) {
       this.search = value;
-      console.log(this.search);
     },
   },
   computed: {

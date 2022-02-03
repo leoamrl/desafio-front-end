@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     addCart(product: Object) {
-      console.log(product);
+      this.$store.commit("ADD_PRODUCT", product);
     },
   },
 };

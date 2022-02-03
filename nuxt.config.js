@@ -30,6 +30,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
+    '@nuxtjs/google-fonts'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -53,5 +54,13 @@ export default {
 
   styleResources: {
     scss: ['./assets/scss/*.scss']
+  },
+
+  googleFonts: {
+    families: {
+      "Source+Sans+Pro": {
+        wght: [400, 600, 700, 900]
+      }
+    }
   }
 }
