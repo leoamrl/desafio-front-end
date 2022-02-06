@@ -40,7 +40,9 @@
                   fill="#8d35b7"
                 />
               </svg>
-              <div class="header-menu-cart-badge">0</div>
+              <div class="header-menu-cart-badge">
+                {{ this.$store.state.cart.list.length }}
+              </div>
             </NuxtLink>
           </li>
         </ul>

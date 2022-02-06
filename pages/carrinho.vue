@@ -1,6 +1,6 @@
 <template>
   <div class="container cart">
-    <table class="cart-table">
+    <table v-if="this.$store.state.cart.list.length" class="cart-table">
       <thead>
         <tr>
           <td>Produtos</td>
@@ -10,7 +10,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr v-for="(item, index) in cart" :key="index">
           <td>
             <span class="cart-table-mLabel">Produto:</span>
             <svg
@@ -25,61 +25,31 @@
               />
             </svg>
             <div>
-              <p class="cart-category">Eletrônicos</p>
-              <p><strong>Notebook Acer Aspire 3</strong></p>
+              <p class="cart-category">{{ item.category }}</p>
+              <p>
+                <strong>{{ item.name }}</strong>
+              </p>
             </div>
           </td>
           <td>
             <span class="cart-table-mLabel">Quantidade:</span>
             <div class="cart-quantity">
-              <button>-</button>
-              <input type="text" />
-              <button>+</button>
+              <button @click="decrementProduct(item.id)">-</button>
+              <input type="text" v-model="item.quantity" />
+              <button @click="incrementProduct(item.id)">+</button>
             </div>
           </td>
           <td>
             <span class="cart-table-mLabel">Valor Unitário:</span>
-            <p><strong>R$ 1.500,00</strong> à vista<br />ou 10x R150,00</p>
+            <p>
+              <strong>{{ item.price }}</strong> à vista<br />ou 10x R150,00
+            </p>
           </td>
           <td>
             <span class="cart-table-mLabel">Total:</span>
-            <p><strong>R$ 1.500,00</strong> à vista<br />ou 10x R150,00</p>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <span class="cart-table-mLabel">Produto:</span>
-            <svg
-              width="21"
-              height="27"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M20.247 3.016h-6.052c-.046-.538-.212-1.448-.78-2.03-.36-.368-.814-.555-1.354-.555H7.752c-.539 0-.995.187-1.352.555-.568.582-.735 1.492-.783 2.03H.431a.43.43 0 1 0 0 .86h.88l.824 19.827c.017.74.478 2.143 2.114 2.143h12.178c1.637 0 2.1-1.403 2.114-2.135l.827-19.835h.88a.428.428 0 0 0 .428-.429.428.428 0 0 0-.429-.431ZM6.462 21.969a.432.432 0 0 1-.863 0V7.755a.43.43 0 1 1 .863 0v14.214Zm4.307 0a.432.432 0 0 1-.862 0V7.755a.43.43 0 1 1 .862 0v14.214Zm4.308 0a.432.432 0 0 1-.863 0V7.755a.43.43 0 1 1 .863 0v14.214ZM7.019 1.586c.192-.198.433-.293.734-.293h4.307c.304 0 .543.095.737.293.347.355.486.978.534 1.43H6.485c.048-.452.187-1.075.534-1.43Z"
-                fill="#cfcfcf"
-              />
-            </svg>
-            <div>
-              <p class="cart-category">Eletrônicos</p>
-              <p><strong>Notebook Acer Aspire 3</strong></p>
-            </div>
-          </td>
-          <td>
-            <span class="cart-table-mLabel">Quantidade:</span>
-            <div class="cart-quantity">
-              <button>-</button>
-              <input type="text" />
-              <button>+</button>
-            </div>
-          </td>
-          <td>
-            <span class="cart-table-mLabel">Valor Unitário:</span>
-            <p><strong>R$ 1.500,00</strong> à vista<br />ou 10x R150,00</p>
-          </td>
-          <td>
-            <span class="cart-table-mLabel">Total:</span>
-            <p><strong>R$ 1.500,00</strong> à vista<br />ou 10x R150,00</p>
+            <p>
+              <strong>{{ item.price }}</strong> à vista<br />ou 10x R150,00
+            </p>
           </td>
         </tr>
       </tbody>
@@ -104,8 +74,8 @@
         </tr>
       </tfoot>
     </table>
-    <div class="cart-actions">
-      <button class="cart-clean">
+    <div v-if="this.$store.state.cart.list.length" class="cart-actions">
+      <button class="cart-clean" @click="cleanCart">
         <svg
           width="21"
           height="27"
@@ -125,6 +95,10 @@
         Concluir compra
       </NuxtLink>
     </div>
+    <div v-if="!this.$store.state.cart.list.length" class="cart-empty">
+      <p>Você ainda não adicionou produtos ao carrinho.</p>
+      <NuxtLink to="/" class="cart-button">Voltar a loja</NuxtLink>
+    </div>
   </div>
 </template>
 
@@ -142,10 +116,31 @@ export default Vue.extend({
       title: "Carrinho - MktPlace",
     };
   },
+  data() {
+    return {};
+  },
+  computed: {
+    cart() {
+      console.log(this.$store.state.cart.list);
+      return this.$store.state.cart.list;
+    },
+  },
+  methods: {
+    cleanCart() {
+      this.$store.dispatch("cart/cleanCart");
+    },
+    incrementProduct(id: number) {
+      console.log(this.cart);
+      this.$store.dispatch("cart/qtyProduct", id);
+    },
+    decrementProduct(id: number) {
+      this.$store.dispatch("cart/qtyProduct", id);
+    },
+  },
 });
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .cart {
   padding-top: 50px;
   padding-bottom: 100px;

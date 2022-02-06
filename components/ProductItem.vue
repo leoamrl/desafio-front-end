@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     addCart(product: Object) {
-      this.$store.commit("ADD_PRODUCT", product);
+      this.$store.dispatch("cart/addProduct", product);
     },
   },
 };

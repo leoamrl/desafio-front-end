@@ -1,7 +1,7 @@
 import { MutationTree } from 'vuex'
 
 export interface State {
-  cart: Array<object>
+  list: Array<object>
 }
 
 export interface Getters {
