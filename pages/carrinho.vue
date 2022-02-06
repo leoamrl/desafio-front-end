@@ -13,18 +13,19 @@
         <tr v-for="(item, index) in cart" :key="index">
           <td>
             <span class="cart-table-mLabel">Produto:</span>
-            <svg
-              width="21"
-              height="27"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              @click="removeProduct(item.id)"
-            >
-              <path
-                d="M20.247 3.016h-6.052c-.046-.538-.212-1.448-.78-2.03-.36-.368-.814-.555-1.354-.555H7.752c-.539 0-.995.187-1.352.555-.568.582-.735 1.492-.783 2.03H.431a.43.43 0 1 0 0 .86h.88l.824 19.827c.017.74.478 2.143 2.114 2.143h12.178c1.637 0 2.1-1.403 2.114-2.135l.827-19.835h.88a.428.428 0 0 0 .428-.429.428.428 0 0 0-.429-.431ZM6.462 21.969a.432.432 0 0 1-.863 0V7.755a.43.43 0 1 1 .863 0v14.214Zm4.307 0a.432.432 0 0 1-.862 0V7.755a.43.43 0 1 1 .862 0v14.214Zm4.308 0a.432.432 0 0 1-.863 0V7.755a.43.43 0 1 1 .863 0v14.214ZM7.019 1.586c.192-.198.433-.293.734-.293h4.307c.304 0 .543.095.737.293.347.355.486.978.534 1.43H6.485c.048-.452.187-1.075.534-1.43Z"
-                fill="#cfcfcf"
-              />
-            </svg>
+            <button class="cart-table-remove" @click="removeProduct(item.id)">
+              <svg
+                width="21"
+                height="27"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20.247 3.016h-6.052c-.046-.538-.212-1.448-.78-2.03-.36-.368-.814-.555-1.354-.555H7.752c-.539 0-.995.187-1.352.555-.568.582-.735 1.492-.783 2.03H.431a.43.43 0 1 0 0 .86h.88l.824 19.827c.017.74.478 2.143 2.114 2.143h12.178c1.637 0 2.1-1.403 2.114-2.135l.827-19.835h.88a.428.428 0 0 0 .428-.429.428.428 0 0 0-.429-.431ZM6.462 21.969a.432.432 0 0 1-.863 0V7.755a.43.43 0 1 1 .863 0v14.214Zm4.307 0a.432.432 0 0 1-.862 0V7.755a.43.43 0 1 1 .862 0v14.214Zm4.308 0a.432.432 0 0 1-.863 0V7.755a.43.43 0 1 1 .863 0v14.214ZM7.019 1.586c.192-.198.433-.293.734-.293h4.307c.304 0 .543.095.737.293.347.355.486.978.534 1.43H6.485c.048-.452.187-1.075.534-1.43Z"
+                  fill="#cfcfcf"
+                />
+              </svg>
+            </button>
             <div>
               <p class="cart-category">{{ item.category }}</p>
               <p>
@@ -209,6 +210,23 @@ export default Vue.extend({
       font-size: 14px;
       color: rgba(#000, 0.7);
     }
+    &-remove {
+      border: none;
+      background-color: transparent;
+
+      svg {
+        path {
+          @include transition;
+        }
+      }
+      &:hover {
+        svg {
+          path {
+            fill: $primary-color;
+          }
+        }
+      }
+    }
     &-total {
       &-cash {
         color: $primary-color;
@@ -232,19 +250,22 @@ export default Vue.extend({
     width: 100px;
     height: 34px;
     border-radius: 2px;
-    border: 1px solid $secondary-color;
     button {
       background-color: transparent;
       border: none;
       font-weight: 700;
       color: $secondary-color;
+      border: 1px solid $secondary-color;
+      &:hover {
+        background-color: #eee;
+      }
     }
     input {
       width: auto;
       border: none;
       text-align: center;
-      border-left: 1px solid $secondary-color;
-      border-right: 1px solid $secondary-color;
+      border-top: 1px solid $secondary-color;
+      border-bottom: 1px solid $secondary-color;
       color: $tertiary-color;
       font-weight: 700;
       font-size: 18px;
@@ -259,12 +280,24 @@ export default Vue.extend({
     padding-top: 50px;
   }
   &-clean {
+    display: flex;
+    align-items: center;
     background-color: transparent;
     border: none;
     color: $tertiary-color;
     font-size: 18px;
     svg {
       margin-right: 15px;
+    }
+    path {
+      @include transition;
+    }
+
+    &:hover {
+      color: $primary-color;
+      path {
+        fill: $primary-color;
+      }
     }
   }
   &-button {

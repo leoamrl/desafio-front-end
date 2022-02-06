@@ -12,7 +12,7 @@
           <ProductItem :product="product" />
         </li>
         <li v-if="!this.filteredProducts.length" class="col-12 products-error">
-          Nenhum produto encontrado
+          Nenhum produto encontrado.
         </li>
       </ul>
     </div>
@@ -70,5 +70,9 @@ export default Vue.extend({
 .products {
   padding: 0;
   list-style: none;
+
+  &-error {
+    margin-bottom: 60px;
+  }
 }
 </style>
