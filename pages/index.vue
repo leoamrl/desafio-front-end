@@ -11,7 +11,7 @@
         >
           <ProductItem :product="product" />
         </li>
-        <li v-if="error" class="col-12 products-error">
+        <li v-if="!this.filteredProducts.length" class="col-12 products-error">
           Nenhum produto encontrado
         </li>
       </ul>

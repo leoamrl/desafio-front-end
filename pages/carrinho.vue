@@ -96,7 +96,10 @@
       </NuxtLink>
     </div>
     <div v-if="!this.$store.state.cart.list.length" class="cart-empty">
-      <p>Você ainda não adicionou produtos ao carrinho.</p>
+      <div>
+        <h2>Carrinho vazio!</h2>
+        <p>Você ainda não adicionou produtos ao carrinho.</p>
+      </div>
       <NuxtLink to="/" class="cart-button">Voltar a loja</NuxtLink>
     </div>
   </div>
@@ -121,7 +124,6 @@ export default Vue.extend({
   },
   computed: {
     cart() {
-      console.log(this.$store.state.cart.list);
       return this.$store.state.cart.list;
     },
   },
@@ -131,10 +133,11 @@ export default Vue.extend({
     },
     incrementProduct(id: number) {
       console.log(this.cart);
-      this.$store.dispatch("cart/qtyProduct", id);
+      this.$store.dispatch("cart/incrementProduct", id);
     },
     decrementProduct(id: number) {
-      this.$store.dispatch("cart/qtyProduct", id);
+      console.log(this.cart);
+      this.$store.dispatch("cart/decrementProduct", id);
     },
   },
 });
@@ -259,9 +262,11 @@ export default Vue.extend({
     }
   }
   &-button {
+    display: block;
     width: 264px;
     height: 54px;
     border-radius: 3px;
+    text-align: center;
     line-height: 54px;
     font-size: 18px;
     background-color: #cfcfcf;
@@ -282,6 +287,13 @@ export default Vue.extend({
       }
     }
   }
+  &-empty {
+    margin-top: 40px;
+    h2 {
+      font-weight: 700;
+      color: $primary-color;
+    }
+  }
 
   @media (min-width: 768px) {
     &-actions {
@@ -290,6 +302,15 @@ export default Vue.extend({
     }
     &-clean {
       margin-right: auto;
+    }
+    &-empty {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      p {
+        margin-bottom: 0;
+      }
     }
   }
   @media (min-width: 992px) {

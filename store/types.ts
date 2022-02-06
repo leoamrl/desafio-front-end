@@ -9,16 +9,18 @@ export interface Getters {
 }
 
 export enum Mutations {
-  ADD_PRODUCT = 'ADD_PRODUCT',
-  QTY_PRODUCT = 'QTY_PRODUCT',
-  REMOVE_PRODUCT = 'REMOVE_PRODUCT',
-  CLEAN_CART = 'CLEAN_CART'
+  addProduct = 'ADD_PRODUCT',
+  decrementProduct = 'DECREMENT_PRODUCT',
+  incrementProduct = 'INCREMENT_PRODUCT',
+  removeProduct = 'REMOVE_PRODUCT',
+  cleanCart = 'CLEAN_CART'
 }
 
 export type RootState = ReturnType<() => State>
 export interface MutationsInterface extends MutationTree<RootState> {
-  [Mutations.ADD_PRODUCT](s: State, p: Array<object>): void;
-  [Mutations.QTY_PRODUCT](s: State, p: number): void;
-  [Mutations.REMOVE_PRODUCT](s: State, p: number): void;
-  [Mutations.CLEAN_CART](s: State): void;
+  ADD_PRODUCT(s: State, p: Array<object>): void;
+  DECREMENT_PRODUCT(s: State, p: number): void;
+  INCREMENT_PRODUCT(s: State, p: number): void;
+  REMOVE_PRODUCT(s: State, p: number): void;
+  CLEAN_CART(s: State): void;
 }

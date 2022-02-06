@@ -25,6 +25,7 @@ declare interface Cart {
   description: string;
   price: number;
   imageUrl: string;
+  quantity: number;
 }
 export default {
   props: {
@@ -36,7 +37,7 @@ export default {
     };
   },
   methods: {
-    addCart(product: Object) {
+    addCart(product: Object): void {
       this.$store.dispatch("cart/addProduct", product);
     },
   },

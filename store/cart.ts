@@ -9,24 +9,44 @@ export const getters: Getters = {
 }
 
 export const mutations: MutationsInterface = {
-  ADD_PRODUCT(state, cartUpdated: any) {
-    const itemExists = state.list.find((item: any) => {
-      item.id === cartUpdated.id
-    })
+  ADD_PRODUCT(state: any, productAdded: any) {
+    let itemExists = state.list.indexOf(productAdded) != -1;
+
     if (itemExists) {
+      const indexProduct = state.list.findIndex((item: any) => {
+        return item.id == productAdded.id
+      })
+
+      if (indexProduct >= 0) {
+        if (state.list[indexProduct].quantity) {
+          state.list[indexProduct].quantity++
+          console.log(state.list[indexProduct].quantity)
+        } else {
+          state.list[indexProduct].quantity = 1
+          console.log(state.list[indexProduct].quantity)
+        }
+      }
+
       return
     }
-    cartUpdated.quantity = 1
-    return state.list.push(cartUpdated)
+
+    return state.list.push(productAdded)
   },
-  QTY_PRODUCT(state: any, productId) {
+  DECREMENT_PRODUCT(state: any, productId) {
     const indexProduct = state.list.findIndex((item: any) => {
       return item.id == productId
     })
-    // console.log(state.list[indexProduct].quantity)
+    console.log(indexProduct)
+    return state.list[indexProduct].quantity -= 1
+  },
+  INCREMENT_PRODUCT(state: any, productId) {
+    const indexProduct = state.list.findIndex((item: any) => {
+      return item.id == productId
+    })
     return state.list[indexProduct].quantity += 1
   },
   REMOVE_PRODUCT(state, productId) {
+
   },
   CLEAN_CART(state) {
     return state.list = []
@@ -37,8 +57,11 @@ export const actions = {
   addProduct({ commit }: any, item: object) {
     commit('ADD_PRODUCT', item)
   },
-  qtyProduct({ commit }: any, id: object) {
-    commit('QTY_PRODUCT', id)
+  decrementProduct({ commit }: any, id: object) {
+    commit('DECREMENT_PRODUCT', id)
+  },
+  incrementProduct({ commit }: any, id: object) {
+    commit('INCREMENT_PRODUCT', id)
   },
   removeProduct({ commit }: any, id: object) {
     commit('REMOVE_PRODUCT', id)
