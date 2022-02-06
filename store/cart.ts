@@ -20,16 +20,12 @@ export const mutations: MutationsInterface = {
       if (indexProduct >= 0) {
         if (state.list[indexProduct].quantity) {
           state.list[indexProduct].quantity++
-          console.log(state.list[indexProduct].quantity)
-        } else {
-          state.list[indexProduct].quantity = 1
-          console.log(state.list[indexProduct].quantity)
         }
       }
 
       return
     }
-
+    productAdded.quantity = 1
     return state.list.push(productAdded)
   },
   DECREMENT_PRODUCT(state: any, productId) {
@@ -46,7 +42,10 @@ export const mutations: MutationsInterface = {
     return state.list[indexProduct].quantity += 1
   },
   REMOVE_PRODUCT(state, productId) {
-
+    const indexProduct = state.list.findIndex((item: any) => {
+      return item.id == productId
+    })
+    return state.list.splice(indexProduct, 1)
   },
   CLEAN_CART(state) {
     return state.list = []

@@ -31,13 +31,8 @@ export default {
   props: {
     product: Object,
   },
-  data() {
-    return {
-      cart: [] as Cart[],
-    };
-  },
   methods: {
-    addCart(product: Object): void {
+    addCart(product: Object) {
       this.$store.dispatch("cart/addProduct", product);
     },
   },
