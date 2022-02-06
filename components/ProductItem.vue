@@ -18,6 +18,7 @@
 </template>
 
 <script lang="ts">
+import Vue from "vue";
 declare interface Cart {
   id: number;
   name: string;
@@ -27,7 +28,7 @@ declare interface Cart {
   imageUrl: string;
   quantity: number;
 }
-export default {
+export default Vue.extend({
   props: {
     product: Object,
   },
@@ -36,7 +37,7 @@ export default {
       this.$store.dispatch("cart/addProduct", product);
     },
   },
-};
+});
 </script>
 
 <style lang="scss">
