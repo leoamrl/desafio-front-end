@@ -126,7 +126,6 @@ export default Vue.extend({
   },
   computed: {
     cart() {
-      console.log(this.$store.state.cart.list);
       return this.$store.state.cart.list;
     },
   },
@@ -135,15 +134,12 @@ export default Vue.extend({
       this.$store.dispatch("cart/cleanCart");
     },
     incrementProduct(id: number) {
-      console.log(this.cart);
       this.$store.dispatch("cart/incrementProduct", id);
     },
     decrementProduct(id: number) {
-      console.log(this.cart);
       this.$store.dispatch("cart/decrementProduct", id);
     },
     removeProduct(id: number) {
-      console.log(this.cart);
       this.$store.dispatch("cart/removeProduct", id);
     },
   },

@@ -9,7 +9,7 @@
       <p class="product-description">
         {{ product.description }}
       </p>
-      <h2 class="product-price">R$ {{ product.price }}</h2>
+      <h2 class="product-price">R$ {{ formatPrice }}</h2>
     </div>
     <button class="product-addcart" v-on:click="addCart(product)">
       Adicionar ao carrinho
@@ -35,6 +35,15 @@ export default Vue.extend({
   methods: {
     addCart(product: Object) {
       this.$store.dispatch("cart/addProduct", product);
+    },
+  },
+  computed: {
+    formatPrice() {
+      const formattedPrice = this.product.price
+        .toFixed(2)
+        .toString()
+        .replace(".", ",");
+      return formattedPrice;
     },
   },
 });

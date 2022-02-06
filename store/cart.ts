@@ -5,7 +5,9 @@ export const state = (): State => ({
 })
 
 export const getters: Getters = {
-  cartLength: state => state.list.length
+  cartLength: (state) => {
+    return state.list.length
+  }
 }
 
 export const mutations: MutationsInterface = {
