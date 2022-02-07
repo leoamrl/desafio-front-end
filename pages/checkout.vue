@@ -132,12 +132,15 @@
         </div>
       </div>
       <div class="col-12 d-flex">
-        <button class="button" v-on:click.prevent="handleCheckout">
+        <button class="button" @click.prevent="viewModal = true">
           Concluir compra
         </button>
       </div>
     </form>
-    <CheckoutSuccess></CheckoutSuccess>
+    <CheckoutSuccess
+      v-on:closeModal="closeModal"
+      v-if="viewModal"
+    ></CheckoutSuccess>
   </div>
 </template>
 
@@ -179,6 +182,7 @@ export default Vue.extend({
       phone: "",
       city: "",
       state: "",
+      viewModal: false,
     };
   },
   methods: {
@@ -199,8 +203,8 @@ export default Vue.extend({
         }
       }
     },
-    handleCheckout(): void {
-      console.log("test");
+    closeModal() {
+      this.viewModal = false;
     },
   },
 });

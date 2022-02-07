@@ -1,44 +1,61 @@
 <template>
   <div class="modal">
-    <div class="modal-overlay"></div>
+    <div class="modal-overlay" @click="closeModal()"></div>
     <div class="modal-content">
+      <div class="modal-close" @click="closeModal()">x</div>
+      <div class="modal-icon">
+        <img src="~/assets/images/confirmed.png" alt="" />
+      </div>
       <h2>Seu cadastro foi solicitado com sucesso!</h2>
-      <NuxtLink to="/"
-        ><svg
+      <NuxtLink to="/">
+        <svg
+          width="20"
+          height="13"
+          fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          height="266.667"
-          width="428"
-          xml:space="preserve"
         >
-          <defs>
-            <clipPath id="a" clipPathUnits="userSpaceOnUse">
-              <path d="M0 1995.42h3210V5.422H0Z" />
-            </clipPath>
-          </defs>
-          <g
-            clip-path="url(#a)"
-            transform="matrix(.13333 0 0 -.13333 0 266.667)"
-          >
+          <g clip-path="url(#a)">
             <path
-              d="M3061.52 1141.24H472.93l617.66 617.73c54.14 54.06 54.14 141.8 0 195.86-54.11 54.1-141.84 54.1-195.86 0L40.59 1100.65c-54.11-54.06-54.11-141.798 0-195.861L894.73 50.57c27.032-27.07 62.5-40.582 97.93-40.582 35.43 0 70.89 13.512 97.93 40.582 54.14 54.102 54.14 141.801 0 195.899L472.93 864.211h2588.59c76.49 0 138.52 62.027 138.52 138.509 0 76.49-62.03 138.52-138.52 138.52z"
+              d="M19.075 5.35H2.947l3.848-3.848a.862.862 0 1 0-1.22-1.22L.253 5.602a.863.863 0 0 0 0 1.22l5.322 5.323a.86.86 0 0 0 1.22 0 .863.863 0 0 0 0-1.22l-3.848-3.85h16.128a.863.863 0 0 0 0-1.725Z"
+              fill="#8E36B7"
             />
           </g>
+          <defs>
+            <clipPath id="a">
+              <path fill="#fff" d="M0 0h20v12.461H0z" />
+            </clipPath>
+          </defs>
         </svg>
         Voltar para home
       </NuxtLink>
     </div>
-    <div class="modal-close">x</div>
   </div>
 </template>
+
+<script lang="ts">
+import Vue from "vue";
+export default Vue.extend({
+  data() {
+    return {
+      viewModal: true,
+    };
+  },
+  methods: {
+    closeModal() {
+      this.$emit("closeModal", this.viewModal);
+    },
+  },
+});
+</script>
 
 <style lang="scss">
 .modal {
   position: fixed;
   top: 0;
-  bottom: 0;
   left: 0;
-  right: 0;
-  display: flex;
+  width: 100%;
+  height: 100%;
+  display: flex !important;
   align-items: center;
   justify-content: center;
   z-index: 100;
@@ -60,9 +77,33 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
 
+    h2 {
+      margin-bottom: 30px;
+      color: #545454;
+      font-weight: 400;
+      font-size: 26px;
+    }
     svg {
       width: 30px;
     }
+    a {
+      text-transform: uppercase;
+      color: $primary-color;
+
+      &:hover {
+        color: $primary-color;
+      }
+    }
+  }
+  &-close {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    font-size: 25px;
+    cursor: pointer;
+  }
+  &-icon {
+    margin-bottom: 30px;
   }
 }
 </style>
