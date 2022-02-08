@@ -1,4 +1,7 @@
+import Vue from 'vue';
 import { State, Getters, Mutations, MutationsInterface } from './types';
+
+export const strict = true;
 
 export const state = (): State => ({
   list: []
@@ -7,6 +10,19 @@ export const state = (): State => ({
 export const getters: Getters = {
   cartLength: (state) => {
     return state.list.length
+  },
+  cartList: (state) => {
+    return state.list
+  },
+  cartTotal: (state) => {
+    const totalPrice = state.list.reduce((total, item: any) => {
+      return total + (item.price * item.quantity)
+    }, 0)
+    return totalPrice.toFixed(2).replace('.', ',')
+  },
+  cartTotalInstallment: (state: State, getters: any) => {
+    const cartInstallment = +getters.cartTotal.replace(',', '.') / 10
+    return cartInstallment.toFixed(2).replace('.', ',')
   }
 }
 
@@ -34,14 +50,23 @@ export const mutations: MutationsInterface = {
     const indexProduct = state.list.findIndex((item: any) => {
       return item.id == productId
     })
-    console.log(indexProduct)
-    return state.list[indexProduct].quantity -= 1
+    const item = state.list[indexProduct];
+
+    if (item.quantity == 1) {
+      return state.list.splice(indexProduct, 1)
+    }
+    item.quantity -= 1
+
+    Vue.set(state.list, indexProduct, item)
   },
   INCREMENT_PRODUCT(state: any, productId) {
     const indexProduct = state.list.findIndex((item: any) => {
       return item.id == productId
     })
-    return state.list[indexProduct].quantity += 1
+    const item = state.list[indexProduct];
+    item.quantity += 1
+
+    Vue.set(state.list, indexProduct, item)
   },
   REMOVE_PRODUCT(state, productId) {
     const indexProduct = state.list.findIndex((item: any) => {

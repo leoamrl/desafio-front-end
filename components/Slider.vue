@@ -1,7 +1,12 @@
 <template>
   <div class="slider">
-    <div class="slider-inner">
-      <div
+    <vue-glide
+      type="slider"
+      :bullet="true"
+      :options="options"
+      class="slider-inner"
+    >
+      <vue-glide-slide
         v-for="slide in slides"
         :key="slide.index"
         :class="{ 'text-right': slide.isRightAligned }"
@@ -12,13 +17,20 @@
           <h1 class="slider-item-title">{{ slide.title }}</h1>
           <h2 class="slider-item-subtitle">{{ slide.subtitle }}</h2>
         </div>
-      </div>
-    </div>
+      </vue-glide-slide>
+    </vue-glide>
   </div>
 </template>
 
 <script>
+import { Glide, GlideSlide } from "vue-glide-js";
+import "vue-glide-js/dist/vue-glide.css";
+
 export default {
+  components: {
+    [Glide.name]: Glide,
+    [GlideSlide.name]: GlideSlide,
+  },
   data() {
     return {
       slides: [
@@ -39,6 +51,9 @@ export default {
           isRightAligned: false,
         },
       ],
+      options: {
+        perView: 1,
+      },
     };
   },
   computed: {
@@ -55,12 +70,9 @@ export default {
   padding: 0;
   margin: 0;
   list-style: none;
-  &-inner {
-    display: flex;
-  }
   &-item {
     width: 100%;
-    height: 440px;
+    height: 440px !important;
     width: 100vw;
     flex-shrink: 0;
     display: inline-flex;
@@ -81,6 +93,57 @@ export default {
       font-weight: 700;
       font-size: 24px;
       color: #fff;
+    }
+  }
+  .glide {
+    &__bullets {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+    }
+    &__bullet {
+      position: relative;
+      width: 16px;
+      height: 16px;
+      border-radius: 8px;
+      background-color: transparent;
+      border: 2px solid $secondary-color;
+      @include transition;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 6px;
+        height: 6px;
+        border-radius: 3px;
+        background-color: transparent;
+        @include transition;
+      }
+
+      &:hover {
+        &::after {
+          background-color: $secondary-color;
+        }
+      }
+
+      &--active {
+        border-color: $primary-color;
+
+        &::after {
+          background-color: $primary-color;
+        }
+
+        &:hover {
+          border-color: darken($primary-color, 10%);
+          &::after {
+            background-color: darken($primary-color, 10%);
+          }
+        }
+      }
     }
   }
 }

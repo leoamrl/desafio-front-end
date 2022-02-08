@@ -5,7 +5,10 @@ export interface State {
 }
 
 export interface Getters {
-  cartLength: (state: State) => number
+  cartLength: (state: State) => number,
+  cartList: (state: State) => Array<object>,
+  cartTotal: (state: State) => string,
+  cartTotalInstallment: (state: State, getters: any) => string,
 }
 
 export enum Mutations {

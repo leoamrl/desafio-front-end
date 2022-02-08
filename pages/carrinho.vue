@@ -1,6 +1,6 @@
 <template>
   <div class="container cart">
-    <table v-if="this.$store.state.cart.list.length" class="cart-table">
+    <table v-if="cartLength" class="cart-table">
       <thead>
         <tr>
           <td>Produtos</td>
@@ -10,7 +10,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(item, index) in cart" :key="index">
+        <tr v-for="(item, index) in cartList" :key="index">
           <td>
             <span class="cart-table-mLabel">Produto:</span>
             <button class="cart-table-remove" @click="removeProduct(item.id)">
@@ -60,7 +60,7 @@
           <td colspan="3"><strong>TOTAL À VISTA</strong></td>
           <td>
             <p class="cart-table-total-cash">
-              <span>R$ 3000,00</span>
+              <span>R$ {{ cartTotal }}</span>
             </p>
           </td>
         </tr>
@@ -69,14 +69,15 @@
           <td>
             <p class="cart-table-total-installment">
               <span>
-                em até 10x <strong>R$300,00</strong><br />(Total R$3.000,00)
+                em até 10x <strong>R$ {{ cartTotalInstallment }}</strong
+                ><br />(Total R${{ cartTotal }})
               </span>
             </p>
           </td>
         </tr>
       </tfoot>
     </table>
-    <div v-if="this.$store.state.cart.list.length" class="cart-actions">
+    <div v-if="cartLength" class="cart-actions">
       <button class="cart-clean" @click="cleanCart">
         <svg
           width="21"
@@ -97,7 +98,7 @@
         Concluir compra
       </NuxtLink>
     </div>
-    <div v-if="!this.$store.state.cart.list.length" class="cart-empty">
+    <div v-if="!cartLength" class="cart-empty">
       <div>
         <h2>Carrinho vazio!</h2>
         <p>Você ainda não adicionou produtos ao carrinho.</p>
@@ -127,6 +128,18 @@ export default Vue.extend({
   computed: {
     cart() {
       return this.$store.state.cart.list;
+    },
+    cartLength() {
+      return this.$store.getters["cart/cartLength"];
+    },
+    cartList() {
+      return this.$store.getters["cart/cartList"];
+    },
+    cartTotal() {
+      return this.$store.getters["cart/cartTotal"];
+    },
+    cartTotalInstallment() {
+      return this.$store.getters["cart/cartTotalInstallment"];
     },
   },
   methods: {

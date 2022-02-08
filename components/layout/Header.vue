@@ -41,7 +41,7 @@
                 />
               </svg>
               <div class="header-menu-cart-badge">
-                {{ this.$store.state.cart.list.length }}
+                {{ cartLength }}
               </div>
             </NuxtLink>
           </li>
@@ -50,6 +50,17 @@
     </div>
   </header>
 </template>
+
+<script lang="ts">
+import Vue from "vue";
+export default Vue.extend({
+  computed: {
+    cartLength() {
+      return this.$store.getters["cart/cartLength"];
+    },
+  },
+});
+</script>
 
 <style lang="scss">
 .header {
