@@ -15,6 +15,7 @@
             type="tel"
             name="cep"
             v-model="cep"
+            v-mask="'#####-###'"
             v-on:blur="getCep"
             id="cep"
           />
@@ -58,7 +59,13 @@
       <div class="col-12 col-sm-6">
         <label for="cpf">CPF *</label>
         <validation-provider rules="required" v-slot="{ errors }">
-          <input v-model="cpf" type="text" name="cpf" id="cpf" />
+          <input
+            v-model="cpf"
+            v-mask="'###.###.###-##'"
+            type="text"
+            name="cpf"
+            id="cpf"
+          />
           <span class="checkout-form-error">{{ errors[0] }}</span>
         </validation-provider>
       </div>
@@ -107,7 +114,13 @@
           <div class="col-12 col-sm-6">
             <label for="phone">Telefone *</label>
             <validation-provider rules="required" v-slot="{ errors }">
-              <input v-model="phone" type="text" name="phone" id="phone" />
+              <input
+                v-model="phone"
+                type="text"
+                v-mask="'(##) #####.####'"
+                name="phone"
+                id="phone"
+              />
               <span class="checkout-form-error">{{ errors[0] }}</span>
             </validation-provider>
           </div>
@@ -125,7 +138,13 @@
           <div class="col-12 col-sm-4">
             <label for="state">Estado *</label>
             <validation-provider rules="required" v-slot="{ errors }">
-              <input type="text" v-model="state" name="state" id="state" />
+              <input
+                type="text"
+                v-model="state"
+                v-mask="'AA'"
+                name="state"
+                id="state"
+              />
               <span class="checkout-form-error">{{ errors[0] }}</span>
             </validation-provider>
           </div>
@@ -187,7 +206,7 @@ export default Vue.extend({
   },
   methods: {
     async getCep() {
-      if (this.cep.length == 8) {
+      if (this.cep.length == 9) {
         try {
           const api = `https://viacep.com.br/ws/${this.cep.replace(
             /\D/g,
