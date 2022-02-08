@@ -56,7 +56,7 @@ import Vue from "vue";
 export default Vue.extend({
   computed: {
     cartLength() {
-      return this.$store.getters["cart/cartLength"];
+      return this.$store.getters["localStorage/cartLength"];
     },
   },
 });

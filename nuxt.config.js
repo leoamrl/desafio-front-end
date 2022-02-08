@@ -38,7 +38,8 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     '@nuxtjs/axios',
-    '@nuxtjs/style-resources'
+    '@nuxtjs/style-resources',
+    'nuxt-vuex-localstorage'
   ],
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa

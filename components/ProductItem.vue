@@ -34,7 +34,7 @@ export default Vue.extend({
   },
   methods: {
     addCart(product: Object) {
-      this.$store.dispatch("cart/addProduct", product);
+      this.$store.dispatch("localStorage/addProduct", product);
     },
   },
   computed: {

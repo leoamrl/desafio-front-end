@@ -11,7 +11,7 @@
       </thead>
       <tbody>
         <tr v-for="(item, index) in cartList" :key="index">
-          <td>
+          <td class="cart-table-info">
             <span class="cart-table-mLabel">Produto:</span>
             <button class="cart-table-remove" @click="removeProduct(item.id)">
               <svg
@@ -127,33 +127,33 @@ export default Vue.extend({
   },
   computed: {
     cart() {
-      return this.$store.state.cart.list;
+      return this.$store.state.localStorage.list;
     },
     cartLength() {
-      return this.$store.getters["cart/cartLength"];
+      return this.$store.getters["localStorage/cartLength"];
     },
     cartList() {
-      return this.$store.getters["cart/cartList"];
+      return this.$store.getters["localStorage/cartList"];
     },
     cartTotal() {
-      return this.$store.getters["cart/cartTotal"];
+      return this.$store.getters["localStorage/cartTotal"];
     },
     cartTotalInstallment() {
-      return this.$store.getters["cart/cartTotalInstallment"];
+      return this.$store.getters["localStorage/cartTotalInstallment"];
     },
   },
   methods: {
     cleanCart() {
-      this.$store.dispatch("cart/cleanCart");
+      this.$store.dispatch("localStorage/cleanCart");
     },
     incrementProduct(id: number) {
-      this.$store.dispatch("cart/incrementProduct", id);
+      this.$store.dispatch("localStorage/incrementProduct", id);
     },
     decrementProduct(id: number) {
-      this.$store.dispatch("cart/decrementProduct", id);
+      this.$store.dispatch("localStorage/decrementProduct", id);
     },
     removeProduct(id: number) {
-      this.$store.dispatch("cart/removeProduct", id);
+      this.$store.dispatch("localStorage/removeProduct", id);
     },
   },
 });
@@ -367,6 +367,7 @@ export default Vue.extend({
         td {
           &:nth-child(1) {
             min-width: 310px;
+            padding-right: 100px;
           }
           &:nth-child(2) {
             min-width: 290px;
