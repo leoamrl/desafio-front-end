@@ -56,11 +56,6 @@ export default {
       },
     };
   },
-  computed: {
-    createBackgroundString(index) {
-      return console.log(index);
-    },
-  },
 };
 </script>
 

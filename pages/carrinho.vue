@@ -44,13 +44,17 @@
           <td>
             <span class="cart-table-mLabel">Valor Unitário:</span>
             <p>
-              <strong>{{ item.price }}</strong> à vista<br />ou 10x R150,00
+              <strong>{{ item.price.toFixed(2) }}</strong> à vista<br />ou 10x
+              R$
+              {{ (item.price / 10).toFixed(2) }}
             </p>
           </td>
           <td>
             <span class="cart-table-mLabel">Total:</span>
             <p>
-              <strong>{{ item.price }}</strong> à vista<br />ou 10x R150,00
+              <strong>{{ (item.price * item.quantity).toFixed(2) }}</strong> à
+              vista<br />ou 10x R$
+              {{ getItemInstallmentPrice(item.price * item.quantity) }}
             </p>
           </td>
         </tr>
@@ -143,6 +147,9 @@ export default Vue.extend({
     },
   },
   methods: {
+    getItemInstallmentPrice(price: number) {
+      return (price / 10).toFixed(2);
+    },
     cleanCart() {
       this.$store.dispatch("localStorage/cleanCart");
     },

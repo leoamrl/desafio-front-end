@@ -1,15 +1,15 @@
 <template>
   <div>
-    <Slider />
+    <IndexSlider />
     <div class="container">
-      <SearchForm v-on:postSearch="handleSearch" />
+      <IndexSearchForm v-on:postSearch="handleSearch" />
       <ul class="products row gy-6">
         <li
           class="col-12 col-sm-6 col-lg-4"
           v-for="product in filteredProducts"
           :key="product.id"
         >
-          <ProductItem :product="product" />
+          <IndexProductItem :product="product" />
         </li>
         <li v-if="!this.filteredProducts.length" class="col-12 products-error">
           Nenhum produto encontrado.

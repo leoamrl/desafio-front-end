@@ -9,7 +9,10 @@ export const state = (): State => ({
 
 export const getters: Getters = {
   cartLength: (state) => {
-    return state.list.length
+    const totalLength = state.list.reduce((total, item: any) => {
+      return total + (item.quantity)
+    }, 0)
+    return totalLength
   },
   cartList: (state) => {
     return state.list
